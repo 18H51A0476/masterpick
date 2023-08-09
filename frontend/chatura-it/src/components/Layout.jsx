@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -16,11 +16,21 @@ import {
   createTheme,
   Box,
   Popover,
+  Avatar
 } from "@mui/material";
-import { Menu, Home, People, School, Person, ExitToApp } from "@mui/icons-material";
-import LeaderboardIcon from '@mui/icons-material/Leaderboard';
-import TrophyIcon from '@mui/icons-material/EmojiEvents';
-import { useHistory ,useLocation} from "react-router-dom";
+import {
+  Menu,
+  Home,
+  People,
+  School,
+  Person,
+  ExitToApp,
+} from "@mui/icons-material";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
+import TrophyIcon from "@mui/icons-material/EmojiEvents";
+import { useHistory, useLocation } from "react-router-dom";
+import SchoolIcon from '@mui/icons-material/School';
+import Logo from "./Logo";
 
 const theme = createTheme({
   palette: {
@@ -37,7 +47,6 @@ const Layout = ({ children }) => {
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = useState(null);
   const location = useLocation(); // Use the useLocation hook
-  
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -68,57 +77,65 @@ const Layout = ({ children }) => {
     window.location.href = "/login";
   };
 
-
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <div
+        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      >
         <AppBar position="static" color="primary">
           <Toolbar>
             <Typography variant="h6" component="h1" style={{ flexGrow: 1 }}>
-              ChaturaIT Learnings
+              <Logo/>
             </Typography>
             {isMediumScreen ? (
               <IconButton color="inherit" onClick={handleDrawerToggle}>
                 <Menu />
               </IconButton>
             ) : (
-              <Tabs value={false} variant="fullWidth" indicatorColor="secondary">
-              <Tab
-                label="Home"
-                icon={<Home />}
-                onClick={() => handleNavigation("/home")}
-                sx={{
-                  color: location.pathname === "/home" ? "#fff" : "#4d4d33",
-                }}
-              />
-              <Tab
-                label="Batches"
-                icon={<People />}
-                onClick={() => handleNavigation("/batches")}
-                sx={{
-                  color: location.pathname === "/batches" ? "#fff" : "#4d4d33",
-                }}
-              />
-              <Tab
-                label="Leaderboard"
-                icon={<LeaderboardIcon />}
-                onClick={() => handleNavigation("/leaderboard")}
-                sx={{
-                  color: location.pathname === "/leaderboard" ? "#fff" : "#4d4d33",
-                }}
-              />
-               <Tab
-                label="Contests"
-                icon={<TrophyIcon />}
-                onClick={() => handleNavigation("/contests")}
-                sx={{
-                  color: location.pathname === "/contests" ? "#fff" : "#4d4d33",
-                }}
-              />
-            </Tabs>
+              <Tabs
+                value={false}
+                variant="fullWidth"
+                indicatorColor="secondary"
+              >
+                <Tab
+                  label="Home"
+                  icon={<Home />}
+                  onClick={() => handleNavigation("/home")}
+                  sx={{
+                    color: location.pathname === "/home" ? "#fff" : "#4d4d33",
+                  }}
+                />
+                <Tab
+                  label="Batches"
+                  icon={<People />}
+                  onClick={() => handleNavigation("/batches")}
+                  sx={{
+                    color:
+                      location.pathname === "/batches" ? "#fff" : "#4d4d33",
+                  }}
+                />
+                <Tab
+                  label="Leaderboard"
+                  icon={<LeaderboardIcon />}
+                  onClick={() => handleNavigation("/leaderboard")}
+                  sx={{
+                    color:
+                      location.pathname === "/leaderboard" ? "#fff" : "#4d4d33",
+                  }}
+                />
+                <Tab
+                  label="Contests"
+                  icon={<TrophyIcon />}
+                  onClick={() => handleNavigation("/contests")}
+                  sx={{
+                    color:
+                      location.pathname === "/contests" ? "#fff" : "#4d4d33",
+                  }}
+                />
+              </Tabs>
             )}
             {localStorage.getItem("user-data") && (
-              <IconButton style={{}} color="inherit" onClick={handleClick}>
+              <IconButton style={{backgroundColor:"#cca300"}} color="inherit" onClick={handleClick}>
                 <Person fontSize="large" />
               </IconButton>
             )}
@@ -196,7 +213,8 @@ const Layout = ({ children }) => {
           }}
         >
           <Typography variant="body2" color="textSecondary">
-            &copy; {new Date().getFullYear()} ChaturaIT Learnings. All rights reserved.
+            &copy; {new Date().getFullYear()} ChaturaIT Learnings. All rights
+            reserved.
           </Typography>
         </footer>
       </div>
