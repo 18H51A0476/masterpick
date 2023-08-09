@@ -18,6 +18,8 @@ import {
   Popover,
 } from "@mui/material";
 import { Menu, Home, People, School, Person, ExitToApp } from "@mui/icons-material";
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import TrophyIcon from '@mui/icons-material/EmojiEvents';
 import { useHistory ,useLocation} from "react-router-dom";
 
 const theme = createTheme({
@@ -99,10 +101,18 @@ const Layout = ({ children }) => {
               />
               <Tab
                 label="Leaderboard"
-                icon={<School />}
+                icon={<LeaderboardIcon />}
                 onClick={() => handleNavigation("/leaderboard")}
                 sx={{
                   color: location.pathname === "/leaderboard" ? "#fff" : "#4d4d33",
+                }}
+              />
+               <Tab
+                label="Contests"
+                icon={<TrophyIcon />}
+                onClick={() => handleNavigation("/contests")}
+                sx={{
+                  color: location.pathname === "/contests" ? "#fff" : "#4d4d33",
                 }}
               />
             </Tabs>
@@ -163,9 +173,15 @@ const Layout = ({ children }) => {
             </ListItem>
             <ListItem button onClick={() => handleNavigation("/leaderboard")}>
               <ListItemIcon>
-                <School />
+                <LeaderboardIcon />
               </ListItemIcon>
               <ListItemText primary="Leaderboard" />
+            </ListItem>
+            <ListItem button onClick={() => handleNavigation("/contests")}>
+              <ListItemIcon>
+                <TrophyIcon />
+              </ListItemIcon>
+              <ListItemText primary="Contests" />
             </ListItem>
           </List>
         </Drawer>

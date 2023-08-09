@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Batches from "./components/Batches";
 import Leaderboard from "./components/Leaderboard";
 import Profile from "./components/Profile";
+import Contests from "./components/Contests";
 
 const Main = () => {
   return (
@@ -26,6 +27,7 @@ const Main = () => {
               <Route exact path="/batches" component={Batches} />
               <Route exact path="/leaderboard" component={Leaderboard} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/contests" component={Contests} />
               {/* Add a default route for unknown routes within /home */}
               <Route render={() => <h1>404 Not Found</h1>} />
             </Switch>

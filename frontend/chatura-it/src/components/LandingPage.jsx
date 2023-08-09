@@ -1,10 +1,11 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { Typography, Button, Container, Box, useMediaQuery } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Header = styled('header')(({ theme }) => ({
   backgroundColor: '#ffd633',
@@ -85,6 +86,13 @@ const Quote = styled('div')({
 const LandingPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [loading, setLoading] = React.useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   const carouselSettings = {
     dots: true,
@@ -98,6 +106,12 @@ const LandingPage = () => {
 
   return (
     <>
+    {
+      loading ? 
+        <Container maxWidth="md" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+          <CircularProgress size={60} />
+        </Container>:
+      <div>
       <Header>
         <Typography variant="h4" component="h1" gutterBottom>
           Welcome to ChaturaIT Learnings
@@ -128,6 +142,7 @@ const LandingPage = () => {
           &copy; {new Date().getFullYear()} ChaturaIT Learnings. All rights reserved.
         </Typography>
       </Footer>
+      </div>}
     </>
   );
 };
