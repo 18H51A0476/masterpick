@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Define the roles enum with mappings
 const roleEnum = {
   ADMIN: 'admin',
-  USER: 'user',
+  STUDENT: 'student',
 };
 
 // Extract allowed role values from the enum object
@@ -24,6 +24,14 @@ const userSchema = new mongoose.Schema(
       index: true,
     },
     lastName: {
+      type: String,
+      required: false,
+    },
+    name: {
+      type: String,
+      required: false,
+    },
+    picture: {
       type: String,
       required: false,
     },

@@ -69,11 +69,10 @@ const Layout = ({ children }) => {
   };
 
   useEffect(() => {
-    setUserInfo(localStorage.getItem("user-data"));
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("user-data");
+    localStorage.removeItem("token");
     window.location.href = "/login";
   };
 
@@ -134,7 +133,7 @@ const Layout = ({ children }) => {
                 />
               </Tabs>
             )}
-            {localStorage.getItem("user-data") && (
+            {localStorage.getItem("token") && (
               <IconButton style={{backgroundColor:"#cca300"}} color="inherit" onClick={handleClick}>
                 <Person fontSize="large" />
               </IconButton>

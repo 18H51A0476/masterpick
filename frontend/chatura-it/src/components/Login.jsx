@@ -13,6 +13,7 @@ import { useHistory } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 import { styled } from '@mui/material/styles';
+import apiService from '../http/ApiService';
 
 const PageContainer = styled(Container)({
   display: 'flex',
@@ -118,14 +119,16 @@ const Login = () => {
   };
 
   const handleGoogleLoginSuccess = (response) => {
-    const decodedToken = jwt_decode(response.credential);
-    console.log('Decoded Token:', decodedToken);
-    localStorage.setItem('user-data', decodedToken);
-    setSnackbarMessage('Login Success');
-    setShowSnackbar(true);
-    setTimeout(() => {
-      history.push('/home');
-    }, 2000);
+
+    apiService.post("/auth/login",{idToken:response.credential}).then((data)=>{
+      localStorage.setItem('token', data.token);
+      setTimeout(() => {
+        history.push('/home');
+      }, 2000);
+    }).catch((err)=>{
+      console.error("Error: ",err)
+    })
+    
   };
 
   const handleGoogleLoginFailure = (error) => {
