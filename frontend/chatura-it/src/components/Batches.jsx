@@ -1,10 +1,21 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Container } from '@mui/material';
+import { Container } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "82.3vh", // Set full screen height
+    backgroundColor: "#354f52", // Blackish-green background color
+  },
+}));
 
 const Batches = () => {
   const [loading, setLoading] = React.useState(false);
+  const classes = useStyles();
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -12,13 +23,11 @@ const Batches = () => {
     }, 1000);
   }, []);
   return (
-    <>
-    {loading ? 
-        <Container maxWidth="md" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
-          <CircularProgress size={60} />
-        </Container>:<div>batches</div>}
-    </>
-  )
-}
+    <div className={classes.root}>
+      {" "}
+      {loading ? <CircularProgress size={60} /> : <h1>batches</h1>}
+    </div>
+  );
+};
 
-export default Batches
+export default Batches;

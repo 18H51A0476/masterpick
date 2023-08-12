@@ -29,8 +29,9 @@ import {
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import TrophyIcon from "@mui/icons-material/EmojiEvents";
 import { useHistory, useLocation } from "react-router-dom";
-import SchoolIcon from '@mui/icons-material/School';
+import apiService from "../http/ApiService";
 import Logo from "./Logo";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 const theme = createTheme({
   palette: {
@@ -47,6 +48,7 @@ const Layout = ({ children }) => {
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = useState(null);
   const location = useLocation(); // Use the useLocation hook
+  const [role,setRole] = useState("student")
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -67,6 +69,16 @@ const Layout = ({ children }) => {
     history.push(route);
     setDrawerOpen(false);
   };
+
+  useEffect(() => {
+    apiService.get("/user/profile")
+      .then((data) => {
+        setRole(data?.user?.role)
+      })
+      .catch((err) => {
+        console.error("Error: ", err);
+      });
+  }, []);
 
   useEffect(() => {
     if(!localStorage.getItem("token")){
@@ -132,6 +144,15 @@ const Layout = ({ children }) => {
                   sx={{
                     color:
                       location.pathname === "/contests" ? "#fff" : "#4d4d33",
+                  }}
+                />
+                <Tab
+                  label="Admin"
+                  icon={<AdminPanelSettingsIcon />}
+                  onClick={() => handleNavigation("/admin")}
+                  sx={{
+                    color:
+                      location.pathname === "/admin" ? "#fff" : "#4d4d33",
                   }}
                 />
               </Tabs>
@@ -201,6 +222,12 @@ const Layout = ({ children }) => {
                 <TrophyIcon />
               </ListItemIcon>
               <ListItemText primary="Contests" />
+            </ListItem>
+            <ListItem button onClick={() => handleNavigation("/admin")}>
+              <ListItemIcon>
+                <AdminPanelSettingsIcon/>
+              </ListItemIcon>
+              <ListItemText primary="admin" />
             </ListItem>
           </List>
         </Drawer>

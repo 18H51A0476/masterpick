@@ -1,28 +1,129 @@
-import React,{useEffect} from 'react'
+import React, { useEffect, useState } from 'react';
 import CircularProgress from "@mui/material/CircularProgress";
-import { Container } from '@mui/material';
+import { Card, CardContent, Typography, Avatar } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import apiService from '../http/ApiService';
-const Profile = () => {
-  const [loading, setLoading] = React.useState(false);
-  useEffect(() => {
-    setLoading(true)
-    apiService.get("/user/profile").then((data)=>{
-      console.log("User Data:",data)
-      setLoading(false)
-    })
-    .catch((err)=>{
-      setLoading(false)
-      console.error("Error: ",err)
-    })
-  }, []);
-  return (
-    <>
-    {loading ? 
-        <Container maxWidth="md" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
-          <CircularProgress size={60} />
-        </Container>:<div>Profile</div>}
-    </>
-  )
-}
 
-export default Profile
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    minHeight: '73.8vh', // Set full screen height
+    backgroundColor: '#354f52', // Blackish-green background color
+    color: 'white', // Text color
+    padding: theme.spacing(4), // Add padding for content
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column', // Stack sections on smaller screens
+      alignItems: 'center',
+    },
+  },
+  cardContainer: {
+    flex: '0 0 25%',
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      flex: '1', // Take full width on smaller screens
+      marginRight: 0,
+      marginBottom: theme.spacing(2),
+    },
+  },
+  card: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: theme.spacing(3),
+    backgroundColor: 'white',
+    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
+    borderRadius: theme.spacing(1),
+  },
+  avatar: {
+    width: theme.spacing(60), // Increased avatar size
+    height: theme.spacing(60), // Increased avatar size
+    marginBottom: theme.spacing(2),
+  },
+  contentContainer: {
+    flex: '1',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: 'white',
+    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
+    borderRadius: theme.spacing(1),
+    padding: theme.spacing(3),
+  },
+  workInProgress: {
+    fontFamily: 'Poppins, sans-serif',
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    color: '#FF5733',
+    marginTop: 'auto',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+  },
+}));
+
+const Profile = () => {
+  const classes = useStyles();
+  const [loading, setLoading] = useState(false);
+  const [profileData, setProfileData] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    apiService.get("/user/profile")
+      .then((data) => {
+        console.log("User Data:", data);
+        setProfileData(data?.user);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.error("Error: ", err);
+      });
+  }, []);
+
+  return (
+    <div className={classes.root}>
+      {loading ? (
+        <CircularProgress size={60} />
+      ) : (
+        <>
+          {profileData && Object.keys(profileData).length > 0 ? ( // Check if profileData is available
+            <>
+              <div className={classes.cardContainer}>
+                <Card className={classes.card}>
+                  <Avatar
+                    alt="User Picture"
+                    src={profileData.picture}
+                    className={classes.avatar}
+                    style={{ width: "90px", height: "90px" }}
+                  />
+                  <CardContent>
+                    <Typography variant="h5">{profileData.name}</Typography>
+                    <Typography color="textSecondary">
+                      {profileData.email}
+                    </Typography>
+                    <Typography color="textSecondary">
+                      Role: {profileData.role}
+                    </Typography>
+                    {/* Add more user data fields here */}
+                  </CardContent>
+                </Card>
+              </div>
+              <div className={classes.contentContainer}>
+                <Typography variant="h6" className={classes.workInProgress}>
+                  Work in Progress
+                </Typography>
+                {/* Add your work in progress content here */}
+              </div>
+            </>
+          ) : (
+            <Typography variant="body1">No user data available.</Typography>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Profile;
