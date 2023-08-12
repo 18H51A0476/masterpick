@@ -35,7 +35,7 @@ const Body = styled('div')(({ theme }) => ({
   backgroundColor: "#354f52",
   color: '#fef3c2',
   padding: '20px',
-  minHeight: '85vh',
+  height: "100vh", // Set full screen height
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'flex-start',

@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
-    minHeight: '73.8vh', // Set full screen height
+    height: '100vh', // Set full screen height
     backgroundColor: '#354f52', // Blackish-green background color
     color: 'white', // Text color
     padding: theme.spacing(4), // Add padding for content
@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     padding: theme.spacing(3),
-    backgroundColor: 'white',
+    color: 'white',
+    backgroundColor: '#2B3945',
     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
     borderRadius: theme.spacing(1),
   },
@@ -45,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
     flex: '1',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: 'white',
+    color: "#d3d3d3",
+    backgroundColor: '#2B3945',
     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
     borderRadius: theme.spacing(1),
     padding: theme.spacing(3),
@@ -100,11 +102,11 @@ const Profile = () => {
                     style={{ width: "90px", height: "90px" }}
                   />
                   <CardContent>
-                    <Typography variant="h5">{profileData.name}</Typography>
-                    <Typography color="textSecondary">
+                    <Typography variant="h5" >{profileData.name}</Typography>
+                    <Typography  >
                       {profileData.email}
                     </Typography>
-                    <Typography color="textSecondary">
+                    <Typography  >
                       Role: {profileData.role}
                     </Typography>
                     {/* Add more user data fields here */}

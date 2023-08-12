@@ -19,7 +19,7 @@ const Admin = () => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      minHeight: '78vh',
+      height: '100vh',
       backgroundColor: '#354f52',
       color: 'white',
       padding: '16px', // Add space between cards

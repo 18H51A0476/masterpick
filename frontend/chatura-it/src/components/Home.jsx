@@ -41,7 +41,7 @@ const Home = () => {
       style={{
         backgroundColor: "#354f52",
         color: "white",
-        maxHeight: "71.7vh",
+        height: "100vh", // Set full screen height
         padding: "40px 0",
         
       }}

@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: "82.3vh", // Set full screen height
+    height: "100vh", // Set full screen height
     backgroundColor: "#354f52", // Blackish-green background color
   },
 }));
