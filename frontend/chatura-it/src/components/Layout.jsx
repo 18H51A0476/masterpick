@@ -69,6 +69,9 @@ const Layout = ({ children }) => {
   };
 
   useEffect(() => {
+    if(!localStorage.getItem("token")){
+      window.location.href = "/login";
+    }
   }, []);
 
   const handleLogout = () => {
@@ -81,7 +84,7 @@ const Layout = ({ children }) => {
       <div
         style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >
-        <AppBar position="static" color="primary">
+        <AppBar position="static" color="primary" style={{maxHeight:"80px"}}>
           <Toolbar>
             <Typography variant="h6" component="h1" style={{ flexGrow: 1 }}>
               <Logo/>

@@ -29,7 +29,7 @@ async function authenticateWithGoogle(req, res) {
     }
 
     // Generate JWT token with expiration of 1 day (24 hours)
-    const jwtToken = jwt.sign({ userId: user._id, email,role:roleEnum.STUDENT,name}, process.env.JWT_SECRET_KEY, {
+    const jwtToken = jwt.sign({ userId: user._id, email,role:user.role,name}, process.env.JWT_SECRET_KEY, {
       expiresIn: '1d',
     });
 

@@ -11,15 +11,14 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.spacing(1), // Add a border radius for style
   },
   avatar: {
-    backgroundColor: "#cca300",
+    backgroundColor: "#997a00",
     marginRight: theme.spacing(2),
-    width:"60px",
-    height:"55px"
+    width:"70px",
+    height:"65px"
   },
   logoText: {
     color: '#fff',
-    fontWeight: 'bold',
-    fontSize: '24px',
+    fontWeight: "800",
     letterSpacing: '1px', // Add some letter spacing for visibility
   },
 }));
@@ -29,10 +28,10 @@ function Logo() {
 
   return (
     <div className={classes.logoContainer}>
-      <Avatar className={classes.avatar}>
-        <SchoolIcon fontSize='large' /> {/* Replace with your desired icon */}
+      <Avatar className={classes.avatar} style={{width:"72px",height:"70px",backgroundColor:"#997a00"}}>
+        <SchoolIcon  fontSize='large' /> {/* Replace with your desired icon */}
       </Avatar>
-      <Typography variant="h6" className={classes.logoText}>
+      <Typography variant="h6" className={classes.logoText} style={{"fontSize":"30px"}}>
         ChaturaIt
       </Typography>
     </div>

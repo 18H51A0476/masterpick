@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const connectToMongoDB = require('./db/mongoDBConnection');
-const authRouter = require("./routes/authRouter")
+const authRouter = require("./routes/authRouter");
+const userRouter = require('./routes/userRouter');
 require('dotenv').config();
 const port = process.env.PORT || 3000;
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/auth', authRouter);
+app.use('/user', userRouter);
 
 
 connectToMongoDB();
