@@ -13,7 +13,7 @@ import { useHistory } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 import { styled } from '@mui/material/styles';
-import apiService from '../http/ApiService';
+import ApiService from '../http/ApiService';
 
 const PageContainer = styled(Container)({
   display: 'flex',
@@ -21,7 +21,9 @@ const PageContainer = styled(Container)({
   alignItems: 'center',
   justifyContent: 'space-between',
   height: '100vh',
-  width:'100%'
+  width: '100%',
+  backgroundColor: '#354f52',
+  color: 'white',
 });
 
 const LoginButton = styled(Button)({
@@ -36,44 +38,44 @@ const SignupLink = styled(Typography)({
   marginTop: 2,
 });
 
-const Header = styled('header')(({ theme }) => ({
+const Header = styled('header')({
   backgroundColor: '#ffd633',
   padding: '20px',
   textAlign: 'center',
   position: 'sticky',
-  top: '0',
-  zIndex: '1',
+  top: 0,
+  zIndex: 1,
   height: '7vh',
   color: '#001a1a',
-}));
+});
 
 const Footer = styled('footer')({
   backgroundColor: '#ffd633',
   padding: '10px',
   textAlign: 'center',
-  position: 'fixed', // Use 'fixed' instead of 'sticky'
-  bottom: '0',
-  left: '0',
-  right: '0',
-  zIndex: '1',
+  position: 'fixed',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  zIndex: 1,
   height: '5vh',
   color: '#001a1a',
 });
 
 const GoogleLoginButton = styled(GoogleLogin)({
   width: '100%',
-  maxWidth: '300px', // Set the maximum width as needed
+  maxWidth: '300px',
   backgroundColor: '#f9a825',
   color: '#fff',
   border: '2px solid #f9a825',
   padding: '12px 24px',
   borderRadius: '8px',
-  fontSize: '16px', // Adjust font size as needed
+  fontSize: '16px',
   textTransform: 'none',
   cursor: 'pointer',
   display: 'inline-flex',
   alignItems: 'center',
-  justifyContent: 'center', // Center the content horizontally
+  justifyContent: 'center',
   fontWeight: 'bold',
   '&:hover': {
     backgroundColor: '#ffc107',
@@ -81,17 +83,16 @@ const GoogleLoginButton = styled(GoogleLogin)({
   },
 });
 
-
-
 const LoginFormContainer = styled(Grid)({
   width: '80%',
   padding: '20px',
-  display: 'flex', // Use flex display to align content
-  flexDirection: 'column', // Stack children vertically
-  justifyContent: 'center', // Center content vertically
-  alignItems: 'center', // Center content horizontally
-  margin: 'auto', // Center the form horizontally
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: 'auto',
 });
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -99,6 +100,7 @@ const Login = () => {
   const history = useHistory();
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const service = new ApiService()
 
   const handleSnackbarClose = () => {
     setShowSnackbar(false);
@@ -120,7 +122,7 @@ const Login = () => {
 
   const handleGoogleLoginSuccess = (response) => {
 
-    apiService.post("/auth/login",{idToken:response.credential}).then((data)=>{
+    service.post("/auth/login",{idToken:response.credential}).then((data)=>{
       localStorage.setItem('token', data.token);
       setTimeout(() => {
         history.push('/home');
@@ -136,7 +138,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div style={{backgroundColor: "#354f52",height:"100vh",color:"#fff"}}>
       <Header>
         <Typography variant="h4" component="h1" gutterBottom>
           Welcome to ChaturaIT Learnings
@@ -150,7 +152,7 @@ const Login = () => {
           </Typography>
           <form sx={{ width: '100%', marginTop: 2 }}>
             <TextField
-              sx={{ marginBottom: 2 }}
+              sx={{ marginBottom: 2 ,color:"#fff"}}
               type="text"
               label="Username"
               variant="outlined"
@@ -176,7 +178,7 @@ const Login = () => {
               Login
             </LoginButton>
           </form>
-          <SignupLink variant="body1" align="center" sx={{ marginTop: 2 }}>
+          <SignupLink variant="body1" align="center" sx={{ marginTop: 2,color:"#fff" }}>
             Don't have an account? <Link to="/signup">Sign Up</Link>
           </SignupLink>
           <div style={{display:"flex",justifyContent:"center"}}>
@@ -192,7 +194,7 @@ const Login = () => {
           &copy; {new Date().getFullYear()} ChaturaIT Learnings. All rights reserved.
         </Typography>
       </Footer>
-    </>
+    </div>
   );
 };
 

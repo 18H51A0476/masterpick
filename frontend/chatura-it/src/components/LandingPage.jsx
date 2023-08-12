@@ -32,7 +32,7 @@ const Footer = styled('footer')({
 });
 
 const Body = styled('div')(({ theme }) => ({
-  backgroundColor: '#003333',
+  backgroundColor: "#354f52",
   color: '#fef3c2',
   padding: '20px',
   minHeight: '85vh',

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CircularProgress from "@mui/material/CircularProgress";
 import { Card, CardContent, Typography, Avatar } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import apiService from '../http/ApiService';
+import ApiService from '../http/ApiService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,13 +67,14 @@ const Profile = () => {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const [profileData, setProfileData] = useState(null);
+  const service = new ApiService()
 
   useEffect(() => {
     setLoading(true);
-    apiService.get("/user/profile")
+    service.get("/user/profile")
       .then((data) => {
         console.log("User Data:", data);
-        setProfileData(data?.user);
+        setProfileData(data.user);
         setLoading(false);
       })
       .catch((err) => {

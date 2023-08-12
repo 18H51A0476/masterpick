@@ -29,7 +29,7 @@ import {
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import TrophyIcon from "@mui/icons-material/EmojiEvents";
 import { useHistory, useLocation } from "react-router-dom";
-import apiService from "../http/ApiService";
+import ApiService from "../http/ApiService";
 import Logo from "./Logo";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
@@ -49,6 +49,7 @@ const Layout = ({ children }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const location = useLocation(); // Use the useLocation hook
   const [role,setRole] = useState("student")
+  const service = new ApiService()
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -71,7 +72,7 @@ const Layout = ({ children }) => {
   };
 
   useEffect(() => {
-    apiService.get("/user/profile")
+    service.get("/user/profile")
       .then((data) => {
         setRole(data?.user?.role)
       })
