@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const roleEnum = {
   ADMIN: 'admin',
   STUDENT: 'student',
+  TRAINER: 'trainer',
 };
 
 // Extract allowed role values from the enum object

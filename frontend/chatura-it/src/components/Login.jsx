@@ -14,6 +14,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 import { styled } from '@mui/material/styles';
 import ApiService from '../http/ApiService';
+import CircularProgress from "@mui/material/CircularProgress";
 
 const PageContainer = styled(Container)({
   display: 'flex',
@@ -100,6 +101,7 @@ const Login = () => {
   const history = useHistory();
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [loading, setLoading] = useState(false);
   const service = new ApiService()
 
   const handleSnackbarClose = () => {
@@ -124,9 +126,11 @@ const Login = () => {
 
     service.post("/auth/login",{idToken:response.credential}).then((data)=>{
       localStorage.setItem('token', data.token);
+      setLoading(true)
       setTimeout(() => {
+        setLoading(false)
         history.push('/home');
-      }, 2000);
+      }, 1000);
     }).catch((err)=>{
       console.error("Error: ",err)
     })
@@ -138,62 +142,81 @@ const Login = () => {
   };
 
   return (
-    <div style={{backgroundColor: "#354f52",height:"100vh",color:"#fff"}}>
-      <Header>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Welcome to ChaturaIT Learnings
-        </Typography>
-      </Header>
-      <LoginFormContainer container>
-        <Grid item xs={12} md={6}>
-          <Typography variant="h2">Welcome Back!</Typography>
-          <Typography variant="body1" sx={{ marginTop: 2 }}>
-            Please login to continue accessing ChaturaIT Learnings.
-          </Typography>
-          <form sx={{ width: '100%', marginTop: 2 }}>
-            <TextField
-              sx={{ marginBottom: 2 ,color:"#fff"}}
-              type="text"
-              label="Username"
-              variant="outlined"
-              fullWidth
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <TextField
-              sx={{ marginBottom: 2 }}
-              type="password"
-              label="Password"
-              variant="outlined"
-              fullWidth
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <LoginButton
-              variant="contained"
-              color="primary"
-              fullWidth
-              onClick={handleLogin}
-            >
-              Login
-            </LoginButton>
-          </form>
-          <SignupLink variant="body1" align="center" sx={{ marginTop: 2,color:"#fff" }}>
-            Don't have an account? <Link to="/signup">Sign Up</Link>
-          </SignupLink>
-          <div style={{display:"flex",justifyContent:"center"}}>
-          <GoogleLoginButton
-            onSuccess={handleGoogleLoginSuccess}
-            onError={handleGoogleLoginFailure}
-          />
-          </div>
-        </Grid>
-      </LoginFormContainer>
-      <Footer>
-        <Typography variant="body2" gutterBottom>
-          &copy; {new Date().getFullYear()} ChaturaIT Learnings. All rights reserved.
-        </Typography>
-      </Footer>
+    <div style={{ backgroundColor: "#354f52", height: "100vh", color: "#fff" }}>
+      {
+       
+        <>
+          {" "}
+          <Header>
+            <Typography variant="h4" component="h1" gutterBottom>
+              Welcome to ChaturaIT Learnings
+            </Typography>
+          </Header>
+          {loading? <CircularProgress
+    size={60}
+    style={{
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+    }}
+  />:<LoginFormContainer container>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h2">Welcome Back!</Typography>
+              <Typography variant="body1" sx={{ marginTop: 2 }}>
+                Please login to continue accessing ChaturaIT Learnings.
+              </Typography>
+              <form sx={{ width: "100%", marginTop: 2 }}>
+                <TextField
+                  sx={{ marginBottom: 2, color: "#fff" }}
+                  type="text"
+                  label="Username"
+                  variant="outlined"
+                  fullWidth
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <TextField
+                  sx={{ marginBottom: 2 }}
+                  type="password"
+                  label="Password"
+                  variant="outlined"
+                  fullWidth
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <LoginButton
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  onClick={handleLogin}
+                >
+                  Login
+                </LoginButton>
+              </form>
+              <SignupLink
+                variant="body1"
+                align="center"
+                sx={{ marginTop: 2, color: "#fff" }}
+              >
+                Don't have an account? <Link to="/signup">Sign Up</Link>
+              </SignupLink>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <GoogleLoginButton
+                  onSuccess={handleGoogleLoginSuccess}
+                  onError={handleGoogleLoginFailure}
+                />
+              </div>
+            </Grid>
+          </LoginFormContainer>}
+          <Footer>
+            <Typography variant="body2" gutterBottom>
+              &copy; {new Date().getFullYear()} ChaturaIT Learnings. All rights
+              reserved.
+            </Typography>
+          </Footer>
+        </>
+      }
     </div>
   );
 };

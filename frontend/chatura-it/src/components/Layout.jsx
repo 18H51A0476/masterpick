@@ -147,7 +147,7 @@ const Layout = ({ children }) => {
                       location.pathname === "/contests" ? "#fff" : "#4d4d33",
                   }}
                 />
-                <Tab
+               { role==="admin" && <Tab
                   label="Admin"
                   icon={<AdminPanelSettingsIcon />}
                   onClick={() => handleNavigation("/admin")}
@@ -155,7 +155,7 @@ const Layout = ({ children }) => {
                     color:
                       location.pathname === "/admin" ? "#fff" : "#4d4d33",
                   }}
-                />
+                />}
               </Tabs>
             )}
             {localStorage.getItem("token") && (

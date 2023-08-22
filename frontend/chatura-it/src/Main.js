@@ -9,6 +9,7 @@ import Leaderboard from "./components/Leaderboard";
 import Profile from "./components/Profile";
 import Contests from "./components/Contests";
 import Admin from "./components/Admin";
+import UserManagement from "./components/UserManagement";
 
 const Main = () => {
   return (
@@ -30,6 +31,7 @@ const Main = () => {
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/contests" component={Contests} />
               <Route exact path="/admin" component={Admin} />
+              <Route exact path="/user-management" component={UserManagement} />
               {/* Add a default route for unknown routes within /home */}
               <Route render={() => <h1>404 Not Found</h1>} />
             </Switch>
