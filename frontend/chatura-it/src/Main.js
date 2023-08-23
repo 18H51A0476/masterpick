@@ -10,6 +10,8 @@ import Profile from "./components/Profile";
 import Contests from "./components/Contests";
 import Admin from "./components/Admin";
 import UserManagement from "./components/UserManagement";
+import CollegeManagement from "./components/collegeManagement";
+
 
 const Main = () => {
   return (
@@ -32,6 +34,7 @@ const Main = () => {
               <Route exact path="/contests" component={Contests} />
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/user-management" component={UserManagement} />
+              <Route exact path="/college-management" component={CollegeManagement} />
               {/* Add a default route for unknown routes within /home */}
               <Route render={() => <h1>404 Not Found</h1>} />
             </Switch>

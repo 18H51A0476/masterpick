@@ -239,7 +239,6 @@ const UserManagement = () => {
               </TableHead>
               <TableBody>
                 {rows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => (
                     <TableRow
                       key={row._id}

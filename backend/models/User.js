@@ -32,6 +32,26 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    rollNumber: {
+      type: String,
+      required: false,
+    },
+    phoneNumber: {
+      type: String,
+      required: false,
+    },
+    college: {
+      type: String,
+      required: false,
+    },
+    branch: {
+      type: String,
+      required: false,
+    },
+    linkeden: {
+      type: String,
+      required: false,
+    },
     picture: {
       type: String,
       required: false,

@@ -22,7 +22,7 @@ const searchUsers = async (req, res) => {
     const totalCount = await User.countDocuments(query);
 
     // Calculate skip and limit based on page and pageSize parameters
-    const skip = (parseInt(page) > 0 ? parseInt(page) - 1 : 0) * parseInt(pageSize);
+    const skip = (parseInt(page) > 0 ? parseInt(page): 0) * parseInt(pageSize);
     const limit = parseInt(pageSize);
 
     const users = await User.find(query)
