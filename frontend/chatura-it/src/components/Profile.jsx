@@ -87,7 +87,8 @@ const Profile = () => {
     backgroundColor: "#2B3945",
     boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
     borderRadius: "8px",
-    marginTop:"1%"
+    marginTop:"1%",
+    zIndex: 2
   };
 
   const avatarStyle = {

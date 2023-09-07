@@ -6,6 +6,7 @@ const authRouter = require("./routes/authRouter");
 const userRouter = require('./routes/userRouter');
 const adminRouter = require('./routes/adminRouter');
 const collegeRouter = require('./routes/collegeRouter');
+const batchRouter = require('./routes/batchRouter');
 require('dotenv').config();
 const port = process.env.PORT || 3000;
 
@@ -21,6 +22,7 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/admin',adminRouter);
 app.use('/college',collegeRouter)
+app.use('/batch',batchRouter)
 
 
 connectToMongoDB();

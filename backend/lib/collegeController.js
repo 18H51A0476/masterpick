@@ -94,4 +94,14 @@ const deleteCollege = async (req, res) => {
   }
 };
 
-module.exports = { createCollege, getColleges, editCollege, deleteCollege };
+const getAllColleges = async (req,res) => {
+  try {
+    const colleges = await College.find({});
+    return res.status(200).json({message:"success",data:colleges})
+  } catch (error) {
+    console.error("Error in getAllColleges", error);
+    res.status(500).json({message:"Server error"})
+  }
+}
+
+module.exports = { createCollege, getColleges, editCollege, deleteCollege ,getAllColleges};

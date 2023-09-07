@@ -109,17 +109,7 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    console.log('Username:', username);
-    console.log('Password:', password);
-    const loginSuccess = true;
 
-    if (loginSuccess) {
-      setSnackbarMessage('Login Success');
-      setShowSnackbar(true);
-      setTimeout(() => {
-        history.push('/home');
-      }, 1000);
-    }
   };
 
   const handleGoogleLoginSuccess = (response) => {
@@ -138,7 +128,7 @@ const Login = () => {
   };
 
   const handleGoogleLoginFailure = (error) => {
-    console.log('Google Login Error:', error);
+    console.error('Google Login Error:', error);
   };
 
   return (

@@ -1,5 +1,5 @@
 const express = require('express');
-const { createCollege, getColleges, editCollege, deleteCollege } = require('../lib/collegeController');
+const { createCollege, getColleges, editCollege, deleteCollege, getAllColleges } = require('../lib/collegeController');
 const protect = require('../middlewares/authMiddleWare');
 const collegeRouter = express.Router();
 
@@ -11,6 +11,10 @@ collegeRouter.post('/add', protect, (req, res) => {
 // Route to get a list of colleges
 collegeRouter.get('', protect, (req, res) => {
   getColleges(req, res);
+});
+
+collegeRouter.get('/all',protect,(req,res)=>{
+  getAllColleges(req,res)
 });
 
 // Route to edit a college
