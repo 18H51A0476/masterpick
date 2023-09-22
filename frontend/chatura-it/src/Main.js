@@ -11,6 +11,11 @@ import Contests from "./components/Contests";
 import Admin from "./components/Admin";
 import UserManagement from "./components/UserManagement";
 import CollegeManagement from "./components/collegeManagement";
+import Landing from "./components/CodePage";
+import Problems from "./components/Problems";
+import CreateEditProblem from "./components/CreateEditProblem";
+import CreateEditContest from "./components/CreateEditContest";
+import CodingContestPage from "./components/CodingContestPage";
 
 
 const Main = () => {
@@ -35,6 +40,11 @@ const Main = () => {
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/user-management" component={UserManagement} />
               <Route exact path="/college-management" component={CollegeManagement} />
+              <Route exact path="/code" component={Landing} />
+              <Route exact path="/problem-management" component={Problems}/>
+              <Route exact path="/problems/create" component={CreateEditProblem}/>
+              <Route exact path="/contests/create" component={CreateEditContest}/>
+              <Route exact path="/contest/code" component={CodingContestPage}/>
               {/* Add a default route for unknown routes within /home */}
               <Route render={() => <h1>404 Not Found</h1>} />
             </Switch>
